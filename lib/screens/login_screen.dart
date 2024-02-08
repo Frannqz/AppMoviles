@@ -24,11 +24,11 @@ class _LoginScreenState extends State<LoginScreen> {
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
             image: DecorationImage(
-                fit: BoxFit.cover, image: AssetImage('images/madara.jpg'))),
+                fit: BoxFit.cover, image: AssetImage('images/login.png'))),
         child: Stack(
           alignment: Alignment.center,
           children: [
-            Image.asset('images/logo.png'),
+            Image.asset('images/loginlogo.png'),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 10),
               color: Colors.black,
