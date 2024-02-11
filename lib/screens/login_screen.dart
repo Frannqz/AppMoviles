@@ -17,7 +17,7 @@ class _LoginScreenState extends State<LoginScreen> {
     decoration: const InputDecoration(border: OutlineInputBorder()),
   );
 
-  final pdwUser = TextFormField(
+  final pwdUser = TextFormField(
     keyboardType: TextInputType.text,
     obscureText: true,
     decoration: const InputDecoration(border: OutlineInputBorder()),
@@ -28,9 +28,9 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             image: DecorationImage(
-                fit: BoxFit.cover, image: AssetImage('images/login.png'))),
+                fit: BoxFit.cover, image: AssetImage('images/login_bg.jpg'))),
         child: Stack(
           alignment: Alignment.center,
           children: [
@@ -43,8 +43,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20)),
-                  height: 200,
-                  width: MediaQuery.of(context).size.width * 9,
+                  height: 155,
+                  width: MediaQuery.of(context).size.width * .9,
                   child: ListView(
                     shrinkWrap: true,
                     children: [
@@ -52,18 +52,18 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(
                         height: 10,
                       ),
-                      pdwUser
+                      pwdUser
                     ],
                   ),
                 ),
               ),
             ),
-            Image.asset('images/loginlogo.png'),
+            Image.asset('images/login_bg_text.png'),
             Positioned(
                 bottom: 50,
                 child: Container(
                   height: 200,
-                  width: MediaQuery.of(context).size.width * .9,
+                  width: MediaQuery.of(context).size.width * .6,
                   child: ListView(
                     shrinkWrap: true,
                     children: [
@@ -89,7 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ? const Positioned(
                     top: 260,
                     child: CircularProgressIndicator(
-                      color: Colors.white,
+                      color: Colors.black38,
                     ))
                 : Container()
           ],
