@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prueba1/screens/splash_screen.dart';
+import 'package:prueba1/screens/dashboard_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -10,6 +11,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: SplashScreen(),
+      routes: {
+        "/dash": (BuildContext context) =>
+            DashboardScreen(), //Le asignamos nombre a las rutas
+      },
     );
   }
 }

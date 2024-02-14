@@ -90,12 +90,16 @@ class _LoginScreenState extends State<LoginScreen> {
                         isLoading = !isLoading;
                       });
                       Future.delayed(new Duration(milliseconds: 5000), () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => new DashboardScreen(),
-                          ),
-                        );
+                        /* Navigator.push(
+                              context, 
+                              MaterialPageRoute(builder: (context) => new DashboardScreen(),)
+                            );*/
+                        Navigator.pushNamed(context, "/dash").then((value) {
+                          //si paso parametros el values los trae
+                          setState(() {
+                            isLoading = !isLoading;
+                          });
+                        });
                       });
                     }),
                     SignInButton(Buttons.Google, onPressed: () {}),
