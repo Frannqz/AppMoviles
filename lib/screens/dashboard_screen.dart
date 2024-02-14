@@ -1,4 +1,6 @@
+import 'package:day_night_switcher/day_night_switcher.dart';
 import 'package:flutter/material.dart';
+import 'package:prueba1/settings/app_value_notifier.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -31,7 +33,13 @@ class DashboardScreen extends StatelessWidget {
               subtitle: Text("Adiós!!"),
               trailing: Icon(Icons.chevron_right),
               onTap: () => {Navigator.pop(context), Navigator.pop(context)},
-            )
+            ),
+            DayNightSwitcherIcon(
+              isDarkModeEnabled: AppValueNotifier.banTheme.value,
+              onStateChanged: (isDarkModeEnabled) {
+                AppValueNotifier.banTheme.value = isDarkModeEnabled;
+              },
+            ),
           ],
         ),
       ),
