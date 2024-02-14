@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:prueba1/screens/splash_screen.dart';
 import 'package:prueba1/screens/dashboard_screen.dart';
 import 'package:prueba1/settings/app_value_notifier.dart';
+import 'package:prueba1/settings/theme.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,7 +15,9 @@ class MyApp extends StatelessWidget {
         valueListenable: AppValueNotifier.banTheme,
         builder: (context, value, child) {
           return MaterialApp(
-            theme: value ? ThemeData.dark() : ThemeData.light(),
+            theme: value
+                ? ThemeApp.darkTheme(context)
+                : ThemeApp.lightTheme(context),
             home: SplashScreen(),
             routes: {
               "/dash": (BuildContext context) =>
