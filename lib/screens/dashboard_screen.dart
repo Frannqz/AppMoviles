@@ -13,7 +13,7 @@ class DashboardScreen extends StatelessWidget {
         //menu de hamburguesa
         child: ListView(
           children: [
-            UserAccountsDrawerHeader(
+            const UserAccountsDrawerHeader(
               currentAccountPicture: CircleAvatar(
                 backgroundImage:
                     NetworkImage('https://i.pravatar.cc/150?img=14'),
@@ -21,11 +21,18 @@ class DashboardScreen extends StatelessWidget {
               accountName: Text('Francisco González Rodríguez'),
               accountEmail: Text('20030114@itcelaya.edu.mx'),
             ),
-            ListTile(
+            const ListTile(
               leading: Icon(Icons.phone),
               title: Text("Practica 1"),
               subtitle: Text("Aqui va la descripción "),
               trailing: Icon(Icons.chevron_right),
+            ),
+            ListTile(
+              leading: Icon(Icons.shop),
+              title: Text("Mi despensa: "),
+              subtitle: Text("Relacion de productos que no voy a usar"),
+              trailing: Icon(Icons.chevron_right),
+              onTap: () => Navigator.pushNamed(context, "/despensa"),
             ),
             ListTile(
               leading: Icon(Icons.close),

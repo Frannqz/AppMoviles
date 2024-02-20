@@ -51,5 +51,9 @@ class ProductsDatabase {
         .delete('tblProducts', where: 'idProducto= ?', whereArgs: [idProducto]);
   }
 
-  Future<ProductosModel> CONSULTAR() async {}
+  Future<List<ProductosModel>> CONSULTAR() async {
+    var conexion = await database;
+    var products = await conexion.query('tblProductos');
+    return products.map((product) => ProductosModel.fromMap(product)).toList();
+  }
 }
