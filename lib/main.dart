@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prueba1/screens/despensa_screen.dart';
+import 'package:prueba1/screens/register_screen.dart';
 import 'package:prueba1/screens/splash_screen.dart';
 import 'package:prueba1/screens/dashboard_screen.dart';
 import 'package:prueba1/settings/app_value_notifier.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
               "/dash": (BuildContext context) => DashboardScreen(),
               "/despensa": (BuildContext context) =>
                   DespensaScreen(), //Le asignamos nombre a las rutas
+              '/register_screen': (BuildContext context) => RegisterScreen(),
             },
           );
         });

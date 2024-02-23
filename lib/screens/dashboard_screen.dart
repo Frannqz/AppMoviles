@@ -28,8 +28,16 @@ class DashboardScreen extends StatelessWidget {
               trailing: Icon(Icons.chevron_right),
             ),
             ListTile(
+              leading: const Icon(Icons.app_registration),
+              title: const Text("Registrar usuario "),
+              subtitle:
+                  const Text("Pantalla personalizada de registro de usuarios"),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => Navigator.pushNamed(context, "/register_screen"),
+            ),
+            ListTile(
               leading: Icon(Icons.shop),
-              title: Text("Mi despensa: "),
+              title: Text("Mi despensa "),
               subtitle: Text("Relacion de productos que no voy a usar"),
               trailing: Icon(Icons.chevron_right),
               onTap: () => Navigator.pushNamed(context, "/despensa"),
