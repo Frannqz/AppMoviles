@@ -36,20 +36,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
               //ImagePicker
               _image != null
                   ? CircleAvatar(
-                      radius: 100, backgroundImage: MemoryImage(_image!))
+                      radius: 60, backgroundImage: MemoryImage(_image!))
                   : const CircleAvatar(
-                      radius: 100,
-                      backgroundImage: NetworkImage(
-                          "https://cdn-icons-png.flaticon.com/512/149/149071.png"),
+                      radius: 60,
+                      backgroundImage: AssetImage("images/user.png"),
                     ),
-              Positioned(
-                  bottom: -0,
-                  left: 140,
-                  child: IconButton(
-                      onPressed: () {
-                        showImagePickerOption(context);
-                      },
-                      icon: const Icon(Icons.add_a_photo))),
+              Container(
+                margin: const EdgeInsets.only(bottom: 25),
+                child: IconButton(
+                    onPressed: () {
+                      showImagePickerOption(context);
+                    },
+                    icon: const Icon(Icons.add_a_photo)),
+              ),
               CustomTextField(
                 controller: nombreController,
                 name: "Nombre Completo",
@@ -70,13 +69,22 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 inputType: TextInputType.text,
                 obscureText: true,
               ),
-              ElevatedButton(
-                onPressed: () {
-                  // Lógica para manejar el evento del botón de registro
-                },
-                child: const Text(
-                  'Registrar',
-                  selectionColor: Colors.green,
+              Container(
+                margin: const EdgeInsets.only(top: 20),
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.green, // color de fondo del botón
+                  ),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 70),
+                    child: const Text(
+                      'Registrar',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ), // color del texto del botón
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -88,7 +96,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   void showImagePickerOption(BuildContext context) {
     showModalBottomSheet(
-        backgroundColor: Colors.green[100],
+        backgroundColor: Colors.green[200],
         context: context,
         builder: (builder) {
           return Padding(
