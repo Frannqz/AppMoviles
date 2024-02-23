@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         valueListenable: AppValueNotifier.banTheme,
         builder: (context, value, child) {
           return MaterialApp(
-            debugShowMaterialGrid: false,
+            debugShowCheckedModeBanner: false,
             theme: value
                 ? ThemeApp.darkTheme(context)
                 : ThemeApp.lightTheme(context),

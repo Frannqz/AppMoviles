@@ -10,24 +10,23 @@ class ProductsDatabase {
 
   static Database? _database;
   Future<Database> get database async {
-    if (_database == null)
-      return _database!; //el signo de admiracion dice que no pude ser null
+    if (_database != null) return _database!;
     return _database = await _initDatabase();
   }
 
   Future<Database> _initDatabase() async {
     Directory folder = await getApplicationDocumentsDirectory();
-    String pathDB = join(folder.path);
+    String pathDB = join(folder.path, NAMEDB);
     return openDatabase(
       pathDB,
       version: VERSIONDB,
       onCreate: (db, version) {
         String query = '''CREATE TABLE tblProductos(
-        idProducto INTEGER PRIMARY KEY,
-        nomProducto VARCHAR(30),
-        canProducto INTEGER,
-        fechaCaducidad DATE
-      )''';
+          idProducto INTEGER PRIMARY KEY,
+          nomProducto VARCHAR(30),
+          canProducto INTEGER,
+          fechaCaducidad VARCHAR(10)
+        )''';
         db.execute(query);
       },
     );
