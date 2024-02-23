@@ -7,6 +7,8 @@ class CustomTextField extends StatelessWidget {
   final bool obscureText;
   final TextCapitalization textCapitalization;
   final TextInputType inputType;
+  final String? Function(String?)
+      validator; // Cambiado el tipo de la función de validación
 
   const CustomTextField({
     Key? key,
@@ -16,14 +18,14 @@ class CustomTextField extends StatelessWidget {
     this.obscureText = false,
     this.textCapitalization = TextCapitalization.none,
     required this.inputType,
+    required this.validator,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 15),
-      child: TextField(
-        enabled: true,
+      child: TextFormField(
         controller: controller,
         textCapitalization: textCapitalization,
         maxLength: 32,
@@ -54,6 +56,8 @@ class CustomTextField extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
         ),
+        validator:
+            validator, // Pasando la función de validación al TextFormField
       ),
     );
   }
