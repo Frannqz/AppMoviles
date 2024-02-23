@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:prueba1/database/products_database.dart';
 import 'package:prueba1/model/products_model.dart';
+import 'package:prueba1/settings/app_value_notifier.dart';
 
 class DespensaScreen extends StatefulWidget {
   const DespensaScreen({super.key});
@@ -48,6 +49,8 @@ class _DespensaScreenState extends State<DespensaScreen> {
             Navigator.pop(context);
             String msj = "";
             if (value > 0) {
+              AppValueNotifier.banProducts.value = !AppValueNotifier.banProducts
+                  .value; //Se hace la negacion para los cambios de estado true o false
               msj = "Producto insertado";
             } else {
               msj = "Ocurrio un error !!!";
@@ -115,29 +118,33 @@ class _DespensaScreenState extends State<DespensaScreen> {
               icon: const Icon(Icons.shop_sharp))
         ],
       ),
-      body: FutureBuilder(
-        future: productsDB!.CONSULTAR(),
-        builder: (context, AsyncSnapshot<List<ProductosModel>> snapshot) {
-          if (snapshot.hasError) {
-            return const Center(
-              child: Text('Algo salio mal: ('),
+      body: ValueListenableBuilder(
+          valueListenable: AppValueNotifier.banProducts,
+          builder: (context, value, _) {
+            return FutureBuilder(
+              future: productsDB!.CONSULTAR(),
+              builder: (context, AsyncSnapshot<List<ProductosModel>> snapshot) {
+                if (snapshot.hasError) {
+                  return const Center(
+                    child: Text('Algo salio mal: ('),
+                  );
+                } else {
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        return itemDespensa(snapshot.data![index]);
+                      },
+                    );
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                }
+              },
             );
-          } else {
-            if (snapshot.hasData) {
-              return ListView.builder(
-                itemCount: snapshot.data!.length,
-                itemBuilder: (context, index) {
-                  return itemDespensa(snapshot.data![index]);
-                },
-              );
-            } else {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          }
-        },
-      ),
+          }),
     );
   }
 
