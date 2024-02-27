@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:prueba1/screens/login_screen.dart';
+// import 'package:prueba1/screens/login_screen.dart';
+import 'package:prueba1/screens/register_screen.dart';
 import 'package:splash_view/source/presentation/pages/pages.dart';
 import 'package:splash_view/source/presentation/widgets/done.dart';
 
@@ -19,7 +20,8 @@ class SplashScreen extends StatelessWidget {
       //   height: 100, // Reducir el tamaño del GIF
       //   width: 100,
       // ),
-      done: Done(const LoginScreen(),
+      // done: Done(const LoginScreen(),
+      done: Done(RegisterScreen(),
           animationDuration: const Duration(milliseconds: 1500)),
     );
   }

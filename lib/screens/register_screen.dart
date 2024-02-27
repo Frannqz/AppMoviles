@@ -1,8 +1,11 @@
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/button_list.dart';
+import 'package:flutter_signin_button/button_view.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:prueba1/model/custom_textfield.dart';
+import 'package:prueba1/screens/onboarding_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   RegisterScreen({Key? key}) : super(key: key);
@@ -12,6 +15,8 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  bool isLoading = false;
+
   final nombreController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -100,6 +105,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         // Todos los campos son válidos, puedes continuar
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => OnboardingScreen()),
+                        );
                       }
                     },
                     style: ElevatedButton.styleFrom(
@@ -116,6 +126,44 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                 ),
+                Container(
+                  padding: EdgeInsets.only(top: 30.0),
+                  height: 230,
+                  width: MediaQuery.of(context).size.width * .85,
+                  child: ListView(
+                    shrinkWrap: true,
+                    children: [
+                      SignInButton(Buttons.Email, onPressed: () {
+                        setState(() {
+                          isLoading = !isLoading;
+                        });
+                        Future.delayed(new Duration(milliseconds: 5000), () {
+                          /* Navigator.push(
+                            context, 
+                            MaterialPageRoute(builder: (context) => new DashboardScreen(),)
+                          );*/
+                          Navigator.pushNamed(context, "/dash").then((value) {
+                            //si paso parametros el values los trae
+                            setState(() {
+                              isLoading = !isLoading;
+                            });
+                          });
+                        });
+                      }),
+                      SignInButton(Buttons.Google, onPressed: () {}),
+                      SignInButton(Buttons.Facebook, onPressed: () {}),
+                      SignInButton(Buttons.GitHub, onPressed: () {}),
+                    ],
+                  ),
+                ),
+                isLoading
+                    ? const Positioned(
+                        top: 490,
+                        child: CircularProgressIndicator(
+                          color: Colors.black38,
+                        ),
+                      )
+                    : Container(),
               ],
             ),
           ),
