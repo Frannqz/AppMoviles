@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
-  final TextEditingController controller;
-  final String name;
-  final IconData prefixIcon;
-  final bool obscureText;
-  final TextCapitalization textCapitalization;
-  final TextInputType inputType;
+  final TextEditingController controller; // Controlador del campo de texto
+  final String name; // Etiqueta del campo de texto
+  final IconData prefixIcon; // Icono que se muestra antes del campo de texto
+  final bool
+      obscureText; // Indica si el texto del campo de texto debe ocultarse
+  final TextCapitalization textCapitalization; // Capitalización del texto
+  final TextInputType inputType; // Tipo de entrada del campo de texto
   final String? Function(String?)
-      validator; // Cambiado el tipo de la función de validación
+      validator; // Función de validación del campo de texto
 
   const CustomTextField({
     Key? key,
