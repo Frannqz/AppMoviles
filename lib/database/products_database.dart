@@ -40,14 +40,14 @@ class ProductsDatabase {
 
   Future<int> ACTUALIZAR(Map<String, dynamic> data) async {
     var conexion = await database;
-    return conexion.update('tblProducts', data,
+    return conexion.update('tblProductos', data,
         where: 'idProducto= ?', whereArgs: [data['idProducto']]);
   }
 
   Future<int> ELIMINAR(int idProducto) async {
     var conexion = await database;
-    return conexion
-        .delete('tblProducts', where: 'idProducto= ?', whereArgs: [idProducto]);
+    return conexion.delete('tblProductos',
+        where: 'idProducto= ?', whereArgs: [idProducto]);
   }
 
   Future<List<ProductosModel>> CONSULTAR() async {

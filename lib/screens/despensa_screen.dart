@@ -22,10 +22,90 @@ class _DespensaScreenState extends State<DespensaScreen> {
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Mi despensa'),
+        actions: [
+          IconButton(
+              onPressed: () {
+                showModal(context, null);
+              },
+              icon: const Icon(Icons.add_task))
+        ],
+      ),
+      body: ValueListenableBuilder(
+          valueListenable: AppValueNotifier.banProducts,
+          builder: (context, value, _) {
+            return FutureBuilder(
+              future: productsDB!.CONSULTAR(),
+              builder: (context, AsyncSnapshot<List<ProductosModel>> snapshot) {
+                if (snapshot.hasError) {
+                  return const Center(
+                    child: Text('Algo salio mal: '),
+                  );
+                } else {
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        return itemDespensa(snapshot.data![index]);
+                      },
+                    );
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                }
+              },
+            );
+          }),
+    );
+  }
+
+  Widget itemDespensa(ProductosModel producto) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+      decoration: BoxDecoration(
+          color: Colors.green[100],
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: Colors.black,
+            width: 2.0,
+          )),
+      height: 100,
+      child: Column(
+        children: [
+          //Como interpolar entre objeto y producto
+          Text('${producto.nomProducto!}'),
+          Text('${producto.fechaCaducidad!}'),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              IconButton(
+                  onPressed: () {
+                    showModal(context, producto);
+                  },
+                  icon: Icon(Icons.edit)),
+              IconButton(onPressed: () {}, icon: Icon(Icons.delete))
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  showModal(context, ProductosModel? producto) {
     //Controladores
     final conNombre = TextEditingController();
     final conCantidad = TextEditingController();
     final conFecha = TextEditingController();
+
+    if (producto != null) {
+      conNombre.text = producto.nomProducto!;
+      conCantidad.text = producto.canProducto!.toString();
+      conFecha.text = producto.fechaCaducidad!;
+    }
 
     final txtNombre = TextFormField(
       keyboardType: TextInputType.text,
@@ -41,28 +121,51 @@ class _DespensaScreenState extends State<DespensaScreen> {
 
     final btnAgregar = ElevatedButton.icon(
         onPressed: () {
-          productsDB!.INSERTAR({
-            "nomProducto": conNombre.text,
-            "canProducto": int.parse(conCantidad.text),
-            "fechaCaducidad": conFecha.text
-          }).then((value) {
-            Navigator.pop(context);
-            String msj = "";
-            if (value > 0) {
-              AppValueNotifier.banProducts.value = !AppValueNotifier.banProducts
-                  .value; //Se hace la negacion para los cambios de estado true o false
-              msj = "Producto insertado";
-            } else {
-              msj = "Ocurrio un error !!!";
-            }
-            var snackbar = SnackBar(content: Text(msj));
-            ScaffoldMessenger.of(context).showSnackBar(snackbar);
-          });
+          if (producto == null) {
+            productsDB!.INSERTAR({
+              "nomProducto": conNombre.text,
+              "canProducto": int.parse(conCantidad.text),
+              "fechaCaducidad": conFecha.text
+            }).then((value) {
+              Navigator.pop(context);
+              String msj = "";
+              if (value > 0) {
+                AppValueNotifier.banProducts.value = !AppValueNotifier
+                    .banProducts
+                    .value; //Se hace la negacion para los cambios de estado true o false
+                msj = "Producto insertado";
+              } else {
+                msj = "Ocurrio un error !!!";
+              }
+              var snackbar = SnackBar(content: Text(msj));
+              ScaffoldMessenger.of(context).showSnackBar(snackbar);
+            });
+          } else {
+            productsDB!.ACTUALIZAR({
+              "idProducto": producto.idProducto,
+              "nomProducto": conNombre.text,
+              "canProducto": int.parse(conCantidad.text),
+              "fechaCaducidad": conFecha.text
+            }).then((value) {
+              Navigator.pop(context);
+              String msj = "";
+              if (value > 0) {
+                AppValueNotifier.banProducts.value = !AppValueNotifier
+                    .banProducts
+                    .value; //Se hace la negacion para los cambios de estado true o false
+                msj = "Producto Actualizado";
+              } else {
+                msj = "Ocurrio un error !!!";
+              }
+              var snackbar = SnackBar(content: Text(msj));
+              ScaffoldMessenger.of(context).showSnackBar(snackbar);
+            });
+          }
         },
         icon: const Icon(Icons.save),
-        label: const Text('Guardar'));
+        label: const Text('Guardar producto'));
 
-    const space = SizedBox(
+    final space = SizedBox(
       height: 10,
     );
 
@@ -92,72 +195,21 @@ class _DespensaScreenState extends State<DespensaScreen> {
       },
     );
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Mi despensa : '),
-        actions: [
-          IconButton(
-              onPressed: () {
-                showModalBottomSheet(
-                    context: context,
-                    builder: (context) {
-                      return ListView(
-                        padding: const EdgeInsets.all(10.0),
-                        children: [
-                          txtNombre,
-                          space,
-                          txtCantidad,
-                          space,
-                          txtFecha,
-                          space,
-                          btnAgregar
-                        ],
-                      );
-                    });
-              },
-              icon: const Icon(Icons.shop_sharp))
-        ],
-      ),
-      body: ValueListenableBuilder(
-          valueListenable: AppValueNotifier.banProducts,
-          builder: (context, value, _) {
-            return FutureBuilder(
-              future: productsDB!.CONSULTAR(),
-              builder: (context, AsyncSnapshot<List<ProductosModel>> snapshot) {
-                if (snapshot.hasError) {
-                  return const Center(
-                    child: Text('Algo salio mal: ('),
-                  );
-                } else {
-                  if (snapshot.hasData) {
-                    return ListView.builder(
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (context, index) {
-                        return itemDespensa(snapshot.data![index]);
-                      },
-                    );
-                  } else {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                }
-              },
-            );
-          }),
-    );
-  }
-
-  Widget itemDespensa(ProductosModel producto) {
-    return Container(
-      height: 100,
-      child: Column(
-        children: [
-          //Como interpolar entre objeto y producto
-          Text('${producto.nomProducto!}'),
-          Text('${producto.fechaCaducidad!}'),
-        ],
-      ),
-    );
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return ListView(
+            padding: const EdgeInsets.all(15.0),
+            children: [
+              txtNombre,
+              space,
+              txtCantidad,
+              space,
+              txtFecha,
+              space,
+              btnAgregar
+            ],
+          );
+        });
   }
 }
