@@ -44,21 +44,26 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   //Atras
+                  //Atras
                   GestureDetector(
                       onTap: () {
-                        _sectionController.jumpToPage(2);
+                        _sectionController.previousPage(
+                          duration: Duration(milliseconds: 500),
+                          curve: Curves.easeOut,
+                        );
                       },
                       child: Text('Anterior')),
+
                   SmoothPageIndicator(controller: _sectionController, count: 3),
                   //Siguiente
                   ultimaPagina
                       ? GestureDetector(
                           onTap: () {
-                            Navigator.push(
+                            Navigator.pop(
                               context,
                               MaterialPageRoute(
                                 builder: (context) {
-                                  return DashboardScreen();
+                                  return RegisterScreen();
                                 },
                               ),
                             );
