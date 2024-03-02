@@ -23,7 +23,7 @@ class IntroPage1 extends StatelessWidget {
                 "Tecnológico Nacional de México en Celaya",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 22,
                   color: Colors.black87,
                   fontWeight: FontWeight.bold,
                 ),
@@ -35,8 +35,8 @@ class IntroPage1 extends StatelessWidget {
                 "El Instituto Tecnológico de Celaya es una institución de educación superior localizada en la ciudad de Celaya, Gto. Es dependiente, al igual que varios institutos tecnológicos, orgánica y funcionalmente del Gobierno Federal.",
                 textAlign: TextAlign.justify,
                 style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.black87,
+                  fontSize: 18,
+                  color: Colors.black,
                 ),
               ),
             ),
@@ -56,7 +56,7 @@ class IntroPage1 extends StatelessWidget {
                       _launchURL();
                     },
                     child: Container(
-                      margin: const EdgeInsets.only(right: 30),
+                      margin: const EdgeInsets.only(right: 40),
                       child: const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -64,7 +64,7 @@ class IntroPage1 extends StatelessWidget {
                             "Antonio García Cubas 600, Fovissste, 38010 Celaya, Gto.",
                             textAlign: TextAlign.start,
                             style: TextStyle(
-                              fontSize: 14,
+                              fontSize: 16,
                               decoration: TextDecoration.underline,
                             ),
                           ),
@@ -81,7 +81,7 @@ class IntroPage1 extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  margin: const EdgeInsets.only(left: 60, top: 10, bottom: 100),
+                  margin: const EdgeInsets.only(left: 60, top: 10, bottom: 135),
                   width: 55,
                   child: Lottie.network(
                     "https://lottie.host/549c8ce1-a475-4581-972d-e37daeb9e2d7/FqjWnhYMCN.json",
@@ -97,14 +97,15 @@ class IntroPage1 extends StatelessWidget {
                           "Telefono:",
                           textAlign: TextAlign.start,
                           style: TextStyle(
-                            fontSize: 14,
+                            fontSize: 16,
                           ),
                         ),
+                        SizedBox(height: 10),
                         Text(
                           "461 611 7575",
                           textAlign: TextAlign.start,
                           style: TextStyle(
-                            fontSize: 14,
+                            fontSize: 16,
                           ),
                         ),
                       ],

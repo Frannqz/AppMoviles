@@ -48,7 +48,7 @@ class IntroPage2 extends StatelessWidget {
                 "Ingeniería en Sistemas Computacionales",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 22,
                     color: Colors.black87,
                     fontWeight: FontWeight.bold),
               ),
@@ -62,7 +62,7 @@ class IntroPage2 extends StatelessWidget {
                   Text(
                     "Perfil de ingreso",
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 16,
                       color: Colors.black87,
                     ),
                   ),
@@ -71,7 +71,7 @@ class IntroPage2 extends StatelessWidget {
                     "El y la estudiante al ingresar, deberá tener habilidades matemáticas y lógicas, capacidad de análisis y síntesis de información, habilidades de investigación, así como interés por la computación y la programación, disposición para trabajar en equipo y sentido de compromiso social.",
                     textAlign: TextAlign.justify,
                     style: TextStyle(
-                      fontSize: 12,
+                      fontSize: 14,
                       color: Colors.black87,
                     ),
                   ),
@@ -87,7 +87,7 @@ class IntroPage2 extends StatelessWidget {
                   Text(
                     "Residencias Profesionales",
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 16,
                       color: Colors.black87,
                     ),
                   ),
@@ -96,7 +96,7 @@ class IntroPage2 extends StatelessWidget {
                     "A partir del 80% de créditos podrá realizar residencias profesionales, en donde pondrá en práctica sus conocimientos adquiridos en organizaciones gubernamentales, privadas, así como en la industria de software.",
                     textAlign: TextAlign.justify,
                     style: TextStyle(
-                      fontSize: 12,
+                      fontSize: 14,
                       color: Colors.black87,
                     ),
                   ),
@@ -113,7 +113,7 @@ class IntroPage2 extends StatelessWidget {
                   Text(
                     "Reticulas de la especialidad",
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 16,
                       color: Colors.black87,
                     ),
                   ),

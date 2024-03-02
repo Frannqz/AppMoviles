@@ -9,7 +9,7 @@ class IntroPage3 extends StatelessWidget {
     return Container(
       color: Colors.amber[200],
       child: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(30.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -21,10 +21,10 @@ class IntroPage3 extends StatelessWidget {
             ),
             const SizedBox(height: 10), // Espacio entre el texto y la animación
             const Text(
-              "Infraestructura dentro la Ing. en Sistemas",
+              "Infraestructura dentro la Ing. en Sistemas Computacionales",
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 22,
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,
               ),
@@ -35,7 +35,7 @@ class IntroPage3 extends StatelessWidget {
               "Cuenta con laboratorios equipados con tecnología de primer nivel en el desarrollo de competencias de las asignaturas que conforman el plan de estudios.",
               textAlign: TextAlign.justify,
               style: TextStyle(
-                fontSize: 14,
+                fontSize: 16,
                 color: Colors.black87,
               ),
             ),
@@ -45,7 +45,7 @@ class IntroPage3 extends StatelessWidget {
             const Text(
               "Laboratorios:",
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 18,
                 color: Colors.black87,
               ),
             ),
@@ -60,28 +60,28 @@ class IntroPage3 extends StatelessWidget {
                   Text(
                     "- Laboratorio de Sistemas Operativos",
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 16,
                       color: Colors.black87,
                     ),
                   ),
                   Text(
                     "- Laboratorio de redes",
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 16,
                       color: Colors.black87,
                     ),
                   ),
                   Text(
                     "- Laboratorio de arquitectura de computadoras",
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 16,
                       color: Colors.black87,
                     ),
                   ),
                   Text(
                     "- Laboratorio de programación",
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 16,
                       color: Colors.black87,
                     ),
                   ),
@@ -90,11 +90,11 @@ class IntroPage3 extends StatelessWidget {
             ),
             const SizedBox(
                 height:
-                    30), // Espacio entre la lista de laboratorios y la nueva sección
+                    40), // Espacio entre la lista de laboratorios y la nueva sección
             const Text(
               "Salones en edificio:",
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 18,
                 color: Colors.black87,
               ),
             ),
@@ -109,7 +109,7 @@ class IntroPage3 extends StatelessWidget {
                   Text(
                     "- Planta Baja:",
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 16,
                       color: Colors.black87,
                     ),
                   ),
@@ -123,6 +123,7 @@ class IntroPage3 extends StatelessWidget {
                 ],
               ),
             ),
+            const SizedBox(height: 15),
             const Padding(
               padding: EdgeInsets.only(left: 30),
               child: Column(
@@ -131,7 +132,7 @@ class IntroPage3 extends StatelessWidget {
                   Text(
                     "- Planta Alta:",
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 16,
                       color: Colors.black87,
                     ),
                   ),
