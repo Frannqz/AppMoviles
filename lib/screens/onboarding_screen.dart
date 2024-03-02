@@ -38,7 +38,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
           //Indicadores de seccion
           Container(
-            alignment: const Alignment(0, 0.85),
+            alignment: const Alignment(0, 0.90),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
