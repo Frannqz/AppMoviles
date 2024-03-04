@@ -42,14 +42,11 @@ dependencies:
   intl: ^0.19.0
   image_picker: ^1.0.2
   smooth_page_indicator: ^1.1.0
-<<<<<<< HEAD
-  art_sweetalert: ^0.0.5
-
-=======
   lottie: ^3.1.0
   url_launcher: ^6.2.5
   accordion: ^2.6.0
->>>>>>> f23adbacf49fb7c833af1a4c70fc43bf752b9e30
+  art_sweetalert: ^0.0.5
+
 
 dev_dependencies:
   flutter_test:
