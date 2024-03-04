@@ -46,7 +46,7 @@ dependencies:
   url_launcher: ^6.2.5
   accordion: ^2.6.0
   art_sweetalert: ^0.0.5
-
+  dio: ^5.4.1
 
 dev_dependencies:
   flutter_test:
