@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:prueba1/screens/Onboardings/IntroPage1.dart';
 import 'package:prueba1/screens/Onboardings/IntroPage2.dart';
 import 'package:prueba1/screens/Onboardings/IntroPage3.dart';
-import 'package:prueba1/screens/dashboard_screen.dart';
 import 'package:prueba1/screens/register_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -39,41 +38,69 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
           //Indicadores de seccion
           Container(
-              alignment: const Alignment(0, 0.85),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  //Atras
-                  GestureDetector(
-                      onTap: () {
-                        _sectionController.jumpToPage(2);
-                      },
-                      child: Text('Anterior')),
-                  SmoothPageIndicator(controller: _sectionController, count: 3),
-                  //Siguiente
-                  ultimaPagina
-                      ? GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return DashboardScreen();
-                                },
-                              ),
-                            );
-                          },
-                          child: Text('Hecho'))
-                      : GestureDetector(
-                          onTap: () {
-                            _sectionController.nextPage(
-                                duration: Duration(milliseconds: 500),
-                                curve: Curves.easeIn);
-                          },
-                          child: Text('Siguiente'))
-                ],
-              )),
+            alignment: const Alignment(0, 0.90),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _btnOnboarding(
+                  text: 'Anterior',
+                  onTap: () {
+                    _sectionController.previousPage(
+                      duration: Duration(milliseconds: 500),
+                      curve: Curves.easeOut,
+                    );
+                  },
+                ),
+                SmoothPageIndicator(controller: _sectionController, count: 3),
+                ultimaPagina
+                    ? _btnOnboarding(
+                        text: 'Hecho',
+                        onTap: () {
+                          Navigator.pop(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return RegisterScreen();
+                              },
+                            ),
+                          );
+                        },
+                      )
+                    : _btnOnboarding(
+                        text: 'Siguiente',
+                        onTap: () {
+                          _sectionController.nextPage(
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.easeIn,
+                          );
+                        },
+                      ),
+              ],
+            ),
+          ),
         ],
+      ),
+    );
+  }
+
+//Botones de navegacion del onboarding
+  _btnOnboarding({required String text, required Function() onTap}) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(18.0),
+        color: Colors.black45,
+      ),
+      padding: const EdgeInsets.all(8.0),
+      child: GestureDetector(
+        onTap: onTap,
+        child: Text(
+          text,
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 15.0,
+          ),
+        ),
       ),
     );
   }
