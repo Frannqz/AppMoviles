@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:prueba1/screens/despensa_screen.dart';
 import 'package:prueba1/screens/detail_movie_screen.dart';
@@ -8,7 +9,11 @@ import 'package:prueba1/screens/dashboard_screen.dart';
 import 'package:prueba1/settings/app_value_notifier.dart';
 import 'package:prueba1/settings/theme.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

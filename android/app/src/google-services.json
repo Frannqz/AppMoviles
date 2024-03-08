@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "234349481830",
+    "project_id": "moviles2024-e3df8",
+    "storage_bucket": "moviles2024-e3df8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:234349481830:android:5be3b29531e14b21aa42a7",
+        "android_client_info": {
+          "package_name": "com.example.prueba1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABAm7H9SZQvdG2T5_Q76i1TQ31z9KrkNE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
