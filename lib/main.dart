@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:prueba1/screens/despensa_screen.dart';
+import 'package:prueba1/screens/detail_movie_screen.dart';
+import 'package:prueba1/screens/popular_movies_screen.dart';
 import 'package:prueba1/screens/register_screen.dart';
 import 'package:prueba1/screens/splash_screen.dart';
 import 'package:prueba1/screens/dashboard_screen.dart';
@@ -27,6 +29,8 @@ class MyApp extends StatelessWidget {
               "/despensa": (BuildContext context) =>
                   DespensaScreen(), //Le asignamos nombre a las rutas
               '/register_screen': (BuildContext context) => RegisterScreen(),
+              '/movies': (BuildContext context) => PopularMoviesScreen(),
+              '/moviesDetail': (BuildContext context) => DetailMovieScreen(),
             },
           );
         });
