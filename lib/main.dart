@@ -11,7 +11,15 @@ import 'package:prueba1/settings/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: const FirebaseOptions(
+      apiKey:
+          "AIzaSyABAm7H9SZQvdG2T5_Q76i1TQ31z9KrkNE", // paste your api key here
+      appId: "com.example.prueba1", //paste your app id here
+      messagingSenderId: "234349481830", //paste your messagingSenderId here
+      projectId: "moviles2024-e3df8", //paste your project id here
+    ),
+  );
   runApp(MyApp());
 }
 

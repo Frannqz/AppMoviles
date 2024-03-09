@@ -43,7 +43,7 @@ class _PopularMoviesScreenState extends State<PopularMoviesScreen> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
                       child: FadeInImage(
-                        placeholder: const AssetImage('images/cargando.gif'),
+                        placeholder: const AssetImage('images/load.gif'),
                         image: NetworkImage(
                             'https://image.tmdb.org/t/p/w500/${snapshot.data![index].posterPath}'),
                       ),
