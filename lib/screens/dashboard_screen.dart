@@ -43,19 +43,20 @@ class DashboardScreen extends StatelessWidget {
               onTap: () => Navigator.pushNamed(context, "/despensa"),
             ),
             ListTile(
-              leading: Icon(Icons.close),
-              title: Text("Salir"),
-              subtitle: Text("Adiós!!"),
-              trailing: Icon(Icons.chevron_right),
-              onTap: () => {Navigator.pop(context), Navigator.pop(context)},
-            ),
-            ListTile(
               leading: Icon(Icons.movie),
               title: Text("Movies"),
               subtitle: Text("Consulta peliculas populares"),
               trailing: Icon(Icons.chevron_right),
               onTap: () => Navigator.pushNamed(context, "/movies"),
             ),
+            ListTile(
+              leading: Icon(Icons.close),
+              title: Text("Salir"),
+              subtitle: Text("Adiós!!"),
+              trailing: Icon(Icons.chevron_right),
+              onTap: () => {Navigator.pop(context), Navigator.pop(context)},
+            ),
+
             DayNightSwitcherIcon(
               isDarkModeEnabled: AppValueNotifier.banTheme.value,
               onStateChanged: (isDarkModeEnabled) {
