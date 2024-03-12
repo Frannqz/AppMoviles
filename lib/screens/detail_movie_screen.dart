@@ -17,6 +17,10 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
     return Scaffold(
       backgroundColor: Colors.black45,
       appBar: AppBar(
+        // leading: const Icon(
+        //   Icons.keyboard_return,
+        //   color: Colors.white,
+        // ),
         backgroundColor: Colors.black54,
         title: const Text(
           'Detalles de Pelicula',

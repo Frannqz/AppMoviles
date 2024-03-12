@@ -6,6 +6,7 @@ import 'package:flutter_signin_button/button_view.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:prueba1/model/custom_textfield.dart';
 import 'package:prueba1/screens/onboarding_screen.dart';
+import 'package:prueba1/services/email_auth_firebase.dart';
 
 class RegisterScreen extends StatefulWidget {
   RegisterScreen({Key? key}) : super(key: key);
@@ -15,6 +16,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  final auth_firebase = EmailAuthFirebase();
   bool isLoading = false;
 
   final nombreController = TextEditingController();
@@ -105,11 +107,29 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         // Todos los campos son válidos, puedes continuar
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => OnboardingScreen()),
-                        );
+                        auth_firebase
+                            .signUpUser(
+                                name: nombreController.text,
+                                password: passwordController.text,
+                                email: emailController.text)
+                            .then((value) {
+                          if (value) {
+                            return Scaffold(
+                              appBar: AppBar(
+                                title: const Text('Registro exitoso'),
+                              ),
+                              body: const Center(
+                                child: Text(
+                                    "Se registró el usuario correctamente."),
+                              ),
+                            );
+                          }
+                        });
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => OnboardingScreen()),
+                        // );
                       }
                     },
                     style: ElevatedButton.styleFrom(

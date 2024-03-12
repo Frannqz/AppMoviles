@@ -23,4 +23,17 @@ class EmailAuthFirebase {
       return false;
     }
   }
+
+  Future<bool> signInUser(
+      {required String password, required String email}) async {
+    var flag = false;
+    final userCredential =
+        await auth.signInWithEmailAndPassword(email: email, password: password);
+    if (userCredential.user != null) {
+      if (userCredential.user!.emailVerified) {
+        flag = true;
+      }
+    }
+    return flag;
+  }
 }
