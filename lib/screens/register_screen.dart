@@ -5,8 +5,8 @@ import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:prueba1/model/custom_textfield.dart';
-import 'package:prueba1/screens/onboarding_screen.dart';
 import 'package:prueba1/services/email_auth_firebase.dart';
+import 'onboarding_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   RegisterScreen({Key? key}) : super(key: key);
@@ -125,15 +125,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             );
                           }
                         });
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => OnboardingScreen()),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => OnboardingScreen()),
+                        );
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.green,
+                      backgroundColor: Colors.green,
                     ),
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 70),

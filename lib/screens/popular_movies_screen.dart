@@ -27,7 +27,7 @@ class _PopularMoviesScreenState extends State<PopularMoviesScreen> {
           builder: (context, AsyncSnapshot<List<PopularModel>?> snapshot) {
             if (snapshot.hasData) {
               return Container(
-                margin: const EdgeInsets.symmetric(vertical: 10),
+                margin: const EdgeInsets.symmetric(vertical: 12),
                 child: GridView.builder(
                   itemCount: snapshot.data!.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
