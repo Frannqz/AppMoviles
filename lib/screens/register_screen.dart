@@ -109,27 +109,42 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         // Todos los campos son válidos, puedes continuar
                         auth_firebase
                             .signUpUser(
-                                name: nombreController.text,
-                                password: passwordController.text,
-                                email: emailController.text)
+                          name: nombreController.text,
+                          password: passwordController.text,
+                          email: emailController.text,
+                          context: context,
+                        )
                             .then((value) {
                           if (value) {
-                            return Scaffold(
-                              appBar: AppBar(
-                                title: const Text('Registro exitoso'),
-                              ),
-                              body: const Center(
-                                child: Text(
-                                    "Se registró el usuario correctamente."),
-                              ),
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text('Registro exitoso'),
+                                  content: const Text(
+                                      'Se registró el usuario correctamente.'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: const Text('Aceptar'),
+                                      onPressed: () {
+                                        Navigator.of(context)
+                                            .pop(); //Quitamos la alerta
+                                        Navigator.push(
+                                          //Redireccion al onboarding
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                OnboardingScreen(),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
                             );
                           }
                         });
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => OnboardingScreen()),
-                        );
                       }
                     },
                     style: ElevatedButton.styleFrom(
