@@ -1,6 +1,9 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:prueba1/apis/api_popular.dart';
 import 'package:prueba1/model/popular_model.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class DetailMovieScreen extends StatefulWidget {
   const DetailMovieScreen({Key? key}) : super(key: key);
@@ -10,21 +13,18 @@ class DetailMovieScreen extends StatefulWidget {
 }
 
 class _DetailMovieScreenState extends State<DetailMovieScreen> {
+  ApiPopular? apiPopular;
+
+  @override
+  void initState() {
+    apiPopular = ApiPopular();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final popularModel =
         ModalRoute.of(context)!.settings.arguments as PopularModel;
-
-    // final Map<String, dynamic> args =
-    //     ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    // final PopularModel movie = args["movie"] as PopularModel;
-    // final String? trailerKey = args["trailerKey"] as String?;
-
-    // _controller = VideoPlayerController.network(
-    //   'https://www.youtube.com/watch?v=$trailerKey',
-    // )..initialize().then((_) {
-    //     setState(() {});
-    //   });
 
     return Scaffold(
       appBar: AppBar(
@@ -108,15 +108,56 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                     ],
                   ),
                 ),
-                AspectRatio(
-                  aspectRatio: 16 / 9, // Proporción del aspecto para la imagen
-                  child: FadeInImage(
-                    placeholder: const AssetImage('images/load.gif'),
-                    image: NetworkImage(
-                      'https://image.tmdb.org/t/p/w500/${popularModel.backdropPath}',
-                    ),
-                    fit: BoxFit.cover,
-                  ),
+                // AspectRatio(
+                //   aspectRatio: 16 / 9, // Proporción del aspecto para la imagen
+                //   child: FadeInImage(
+                //     placeholder: const AssetImage('images/load.gif'),
+                //     image: NetworkImage(
+                //       'https://image.tmdb.org/t/p/w500/${popularModel.backdropPath}',
+                //     ),
+                //     fit: BoxFit.cover,
+                //   ),
+                // ),
+
+                // Visualizador del tráiler
+                FutureBuilder(
+                  future: apiPopular!.getTrailerKey(popularModel.id as int),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const CircularProgressIndicator();
+                    } else if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    } else if (snapshot.hasData) {
+                      YoutubePlayerController _controller =
+                          YoutubePlayerController(
+                        initialVideoId: snapshot.data!,
+                        flags: const YoutubePlayerFlags(
+                          autoPlay: false,
+                          mute: false,
+                        ),
+                      );
+                      return YoutubePlayer(
+                        //Retorna el reproductor de youtube
+                        controller: _controller,
+                        showVideoProgressIndicator: false,
+                        progressIndicatorColor: Colors.red,
+                        progressColors: const ProgressBarColors(
+                          playedColor: Colors.red,
+                          handleColor: Colors.redAccent,
+                        ),
+                        bottomActions: [
+                          ProgressBar(isExpanded: true),
+                        ],
+                      );
+                    } else {
+                      return const Center(
+                        child: Text(
+                          "Fallo la visualización del trailer",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      );
+                    }
+                  },
                 ),
                 Padding(
                   padding: const EdgeInsets.all(20.0),

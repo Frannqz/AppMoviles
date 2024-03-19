@@ -20,21 +20,40 @@ class ApiPopular {
   }
 
   Future<String?> getTrailerKey(int movieId) async {
-    final trailerUrl =
-        "https://api.themoviedb.org/3/movie/$movieId/videos?api_key=fc94b66bb0314813cf7af53dd2cba49d";
+    final trailerUrlEsMX =
+        "https://api.themoviedb.org/3/movie/$movieId/videos?api_key=fc94b66bb0314813cf7af53dd2cba49d&language=es-MX";
+
+    final trailerUrlEn =
+        "https://api.themoviedb.org/3/movie/$movieId/videos?api_key=fc94b66bb0314813cf7af53dd2cba49d&language=en-US";
 
     try {
-      final response = await dio.get(trailerUrl);
+      // Consulta tráilers en español de México
+      final responseEsMX = await dio.get(trailerUrlEsMX);
+      if (responseEsMX.statusCode == 200) {
+        final resultsEsMX = responseEsMX.data['results'];
+        if (resultsEsMX != null && resultsEsMX.isNotEmpty) {
+          // Filtra para encontrar el tráiler oficial
+          final trailerEsMX = resultsEsMX.firstWhere(
+            (video) => video['type'] == 'Trailer',
+            orElse: () => null,
+          );
+          if (trailerEsMX != null) {
+            return trailerEsMX['key'];
+          }
+        }
+      }
 
-      if (response.statusCode == 200) {
-        final results = response.data['results'];
-        if (results != null && results.isNotEmpty) {
-          // Filtrar para encontrar el tráiler oficial
-          final trailer = results.firstWhere(
-              (video) => video['type'] == 'Trailer',
-              orElse: () => null);
-          if (trailer != null) {
-            return trailer['key'];
+      // Consulta tráilers en inglés si no se encuentran tráilers en español de México
+      final responseEn = await dio.get(trailerUrlEn);
+      if (responseEn.statusCode == 200) {
+        final resultsEn = responseEn.data['results'];
+        if (resultsEn != null && resultsEn.isNotEmpty) {
+          final trailerEn = resultsEn.firstWhere(
+            (video) => video['type'] == 'Trailer',
+            orElse: () => null,
+          );
+          if (trailerEn != null) {
+            return trailerEn['key'];
           }
         }
       }

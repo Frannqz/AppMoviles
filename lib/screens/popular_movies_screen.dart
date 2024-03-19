@@ -41,19 +41,6 @@ class _PopularMoviesScreenState extends State<PopularMoviesScreen> {
                         Navigator.pushNamed(context, "/moviesDetail",
                             arguments: snapshot.data![
                                 index]); //Se mandan los argumentos al detail
-                        //         onTap: () async {
-                        // final movie = snapshot.data![
-                        //     index]; // Obtener la instancia de PopularModel
-                        // final trailerKey = await ApiPopular().getTrailerKey(
-                        //     movie.id!); // Obtener la clave del tráiler
-                        // Navigator.pushNamed(
-                        //   context,
-                        //   "/moviesDetail",
-                        //   arguments: {
-                        //     "movie": movie,
-                        //     "trailerKey": trailerKey
-                        //   }, // Pasamos el modelo de la película y la clave del tráiler como argumentos
-                        // );
                       },
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
