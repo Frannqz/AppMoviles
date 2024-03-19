@@ -21,9 +21,21 @@ class _PopularMoviesScreenState extends State<PopularMoviesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        foregroundColor: Colors.white,
+        centerTitle: true,
+        title: const Text(
+          'Películas Populares',
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+      backgroundColor: Colors.black,
       body: FutureBuilder(
           future: apiPopular!.getPopularMovie(), //Mandar ejecutar el futuro
-
           builder: (context, AsyncSnapshot<List<PopularModel>?> snapshot) {
             if (snapshot.hasData) {
               return Container(

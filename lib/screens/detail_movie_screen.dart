@@ -28,15 +28,25 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black54,
+        backgroundColor: Colors.black,
+        foregroundColor: Colors.white,
         title: const Text(
           'Detalles de Película',
           style: TextStyle(
             fontSize: 22,
-            color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.favorite_border,
+            ),
+            onPressed: () {
+              //Accion
+            },
+          ),
+        ],
       ),
       body: Stack(
         fit: StackFit.expand,
@@ -70,12 +80,12 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                     children: [
                       SizedBox(
                         width: MediaQuery.of(context).size.width *
-                            0.5, // Ancho máximo para el título
+                            0.6, // Ancho máximo para el título
 
                         child: Text(
                           popularModel.title ?? 'Título no disponible',
                           style: const TextStyle(
-                            fontSize: 18,
+                            fontSize: 28,
                             color: Colors.white,
                           ),
                         ),
@@ -162,9 +172,10 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Text(
+                    textAlign: TextAlign.justify,
                     'Resumen: \n${popularModel.overview}',
                     style: const TextStyle(
-                      fontSize: 16,
+                      fontSize: 18,
                       color: Colors.white,
                     ),
                   ),
