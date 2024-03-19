@@ -85,6 +85,13 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                         child: Text(
                           popularModel.title ?? 'Título no disponible',
                           style: const TextStyle(
+                            shadows: [
+                              Shadow(
+                                color: Colors.black,
+                                blurRadius: 5.0,
+                                offset: Offset(2.0, 2.0),
+                              ),
+                            ],
                             fontSize: 28,
                             color: Colors.white,
                           ),
@@ -130,45 +137,53 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                 // ),
 
                 // Visualizador del tráiler
-                FutureBuilder(
-                  future: apiPopular!.getTrailerKey(popularModel.id as int),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const CircularProgressIndicator();
-                    } else if (snapshot.hasError) {
-                      return Text('Error: ${snapshot.error}');
-                    } else if (snapshot.hasData) {
-                      YoutubePlayerController _controller =
-                          YoutubePlayerController(
-                        initialVideoId: snapshot.data!,
-                        flags: const YoutubePlayerFlags(
-                          autoPlay: false,
-                          mute: false,
-                        ),
-                      );
-                      return YoutubePlayer(
-                        //Retorna el reproductor de youtube
-                        controller: _controller,
-                        showVideoProgressIndicator: false,
-                        progressIndicatorColor: Colors.red,
-                        progressColors: const ProgressBarColors(
-                          playedColor: Colors.red,
-                          handleColor: Colors.redAccent,
-                        ),
-                        bottomActions: [
-                          ProgressBar(isExpanded: true),
-                        ],
-                      );
-                    } else {
-                      return const Center(
-                        child: Text(
-                          "Fallo la visualización del trailer",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      );
-                    }
-                  },
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 8),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: FutureBuilder(
+                      future: apiPopular!.getTrailerKey(popularModel.id as int),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const CircularProgressIndicator();
+                        } else if (snapshot.hasError) {
+                          return Text('Error: ${snapshot.error}');
+                        } else if (snapshot.hasData) {
+                          YoutubePlayerController _controller =
+                              YoutubePlayerController(
+                            initialVideoId: snapshot.data!,
+                            flags: const YoutubePlayerFlags(
+                              autoPlay: false,
+                              mute: false,
+                            ),
+                          );
+                          return YoutubePlayer(
+                            //Retorna el reproductor de youtube
+                            controller: _controller,
+                            showVideoProgressIndicator: false,
+                            progressIndicatorColor: Colors.red,
+                            progressColors: const ProgressBarColors(
+                              playedColor: Colors.red,
+                              handleColor: Colors.redAccent,
+                            ),
+                            bottomActions: [
+                              ProgressBar(isExpanded: true),
+                            ],
+                          );
+                        } else {
+                          return const Center(
+                            child: Text(
+                              "Fallo la visualización del trailer",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          );
+                        }
+                      },
+                    ),
+                  ),
                 ),
+
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Text(
