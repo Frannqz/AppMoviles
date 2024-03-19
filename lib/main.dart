@@ -37,6 +37,7 @@ class MyApp extends StatelessWidget {
                 ? ThemeApp.darkTheme(context)
                 : ThemeApp.lightTheme(context),
             home: SplashScreen(),
+            // home: MyWidget(),
             routes: {
               "/dash": (BuildContext context) => DashboardScreen(),
               "/despensa": (BuildContext context) =>

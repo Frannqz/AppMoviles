@@ -1,5 +1,3 @@
-// https://api.themoviedb.org/3/movie/popular?api_key=ff24b7bbb0fc4a4369dcb8cd87fa1f48&language=es-MX&page=1
-
 class PopularModel {
   String? backdropPath;
   int? id;
@@ -12,6 +10,7 @@ class PopularModel {
   String? title;
   double? voteAverage;
   int? voteCount;
+  String? trailerKey;
 
   PopularModel({
     this.backdropPath,
@@ -25,6 +24,7 @@ class PopularModel {
     this.title,
     this.voteAverage,
     this.voteCount,
+    this.trailerKey,
   });
 
   factory PopularModel.fromMap(Map<String, dynamic> movie) {
@@ -40,6 +40,7 @@ class PopularModel {
       title: movie['title'],
       voteAverage: movie['vote_average'],
       voteCount: movie['vote_count'],
+      trailerKey: movie['key'],
     );
   }
 }
