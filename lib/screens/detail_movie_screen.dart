@@ -5,6 +5,7 @@ import 'package:prueba1/apis/api_details_movie.dart';
 import 'package:prueba1/apis/api_popular.dart';
 import 'package:prueba1/model/popular_model.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class DetailMovieScreen extends StatefulWidget {
   const DetailMovieScreen({Key? key}) : super(key: key);
@@ -25,6 +26,7 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     final popularModel =
         ModalRoute.of(context)!.settings.arguments as PopularModel;
 
@@ -32,9 +34,9 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         foregroundColor: Colors.white,
-        title: const Text(
+        title: Text(
           'Detalles de Película',
-          style: TextStyle(
+          style: GoogleFonts.lato(
             fontSize: 22,
             fontWeight: FontWeight.bold,
           ),
@@ -73,7 +75,7 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
           SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+              children: <Widget>[
                 Container(
                   margin:
                       const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
@@ -81,14 +83,13 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       SizedBox(
-                        width: MediaQuery.of(context).size.width *
-                            0.6, // Ancho máximo para el título
+                        width: size.width * 0.6, // Ancho máximo para el título
 
                         child: Text(
                           popularModel.title ?? 'Título no disponible',
-                          style: const TextStyle(
+                          style: GoogleFonts.lato(
                             shadows: [
-                              Shadow(
+                              const Shadow(
                                 color: Colors.black,
                                 blurRadius: 5.0,
                                 offset: Offset(2.0, 2.0),
@@ -116,7 +117,7 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                             Text(
                               // popularModel.voteAverage.toString(),
                               popularModel.voteAverage!.toStringAsFixed(1),
-                              style: const TextStyle(
+                              style: GoogleFonts.lato(
                                 fontSize: 18,
                                 color: Colors.black,
                               ),
@@ -185,13 +186,42 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                     ),
                   ),
                 ),
+                //RELEASE DATE
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 20, right: 20, top: 20, bottom: 5),
+                      child: Text(
+                        'Fecha de lanzamiento:',
+                        style: GoogleFonts.lato(
+                          fontSize: 22,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0),
+                      child: Text(
+                        popularModel.releaseDate ?? 'Fecha no disponible',
+                        style: GoogleFonts.lato(
+                          fontSize: 14,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 //GENEROS
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: Text(
                     'Géneros',
-                    style: TextStyle(
-                      fontSize: 18,
+                    style: GoogleFonts.lato(
+                      fontSize: 22,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
@@ -214,12 +244,11 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                             runSpacing: 4.0,
                             children: genres.map((genre) {
                               return Chip(
-                                avatar: CircleAvatar(
-                                  backgroundColor: Colors.green.shade900,
-                                ),
                                 label: Text(
                                   genre,
-                                  style: TextStyle(color: Colors.black),
+                                  style: GoogleFonts.lato(
+                                    color: Colors.black,
+                                  ),
                                 ),
                                 backgroundColor: Colors.white,
                                 elevation: 4,
@@ -261,9 +290,24 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                   child: Text(
                     textAlign: TextAlign.justify,
                     'Resumen: \n${popularModel.overview}',
-                    style: const TextStyle(
+                    style: GoogleFonts.lato(
                       fontSize: 18,
                       color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+
+                //GENEROS
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Text(
+                    'Actores',
+                    style: GoogleFonts.lato(
+                      fontSize: 18,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:prueba1/apis/api_popular.dart';
 import 'package:prueba1/model/popular_model.dart';
 
@@ -25,9 +26,9 @@ class _PopularMoviesScreenState extends State<PopularMoviesScreen> {
         backgroundColor: Colors.black,
         foregroundColor: Colors.white,
         centerTitle: true,
-        title: const Text(
+        title: Text(
           'Películas Populares',
-          style: TextStyle(
+          style: GoogleFonts.lato(
             fontSize: 22,
             fontWeight: FontWeight.bold,
           ),
