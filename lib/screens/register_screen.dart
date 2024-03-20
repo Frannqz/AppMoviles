@@ -5,6 +5,7 @@ import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:prueba1/model/custom_textfield.dart';
+import 'package:prueba1/screens/dashboard_screen.dart';
 import 'package:prueba1/services/email_auth_firebase.dart';
 import 'onboarding_screen.dart';
 
@@ -134,7 +135,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                OnboardingScreen(),
+                                                // OnboardingScreen(),
+                                                DashboardScreen(),
                                           ),
                                         );
                                       },
