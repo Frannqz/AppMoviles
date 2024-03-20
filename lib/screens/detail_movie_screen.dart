@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:prueba1/apis/api_details_movie.dart';
 import 'package:prueba1/apis/api_popular.dart';
 import 'package:prueba1/model/popular_model.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -14,6 +15,7 @@ class DetailMovieScreen extends StatefulWidget {
 
 class _DetailMovieScreenState extends State<DetailMovieScreen> {
   ApiPopular? apiPopular;
+  ApiDetailsMovie apiDetailsMovie = ApiDetailsMovie();
 
   @override
   void initState() {
@@ -181,6 +183,76 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                         }
                       },
                     ),
+                  ),
+                ),
+                //GENEROS
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Text(
+                    'Géneros',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  child: FutureBuilder<List<String>?>(
+                    future: apiDetailsMovie.getGenres(popularModel.id as int),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const CircularProgressIndicator();
+                      } else if (snapshot.hasError) {
+                        return Text('Error: ${snapshot.error}');
+                      } else if (snapshot.hasData) {
+                        List<String>? genres = snapshot.data;
+                        if (genres != null && genres.isNotEmpty) {
+                          return Wrap(
+                            spacing: 8.0,
+                            runSpacing: 4.0,
+                            children: genres.map((genre) {
+                              return Chip(
+                                avatar: CircleAvatar(
+                                  backgroundColor: Colors.green.shade900,
+                                ),
+                                label: Text(
+                                  genre,
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                                backgroundColor: Colors.white,
+                                elevation: 4,
+                                shadowColor: Colors.green.withOpacity(0.8),
+                                padding: const EdgeInsets.all(5.0),
+                                labelPadding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                labelStyle: const TextStyle(fontSize: 13.0),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(50.0),
+                                  side: BorderSide(
+                                      color: Colors.green.shade900, width: 1.0),
+                                ),
+                              );
+                            }).toList(),
+                          );
+                        } else {
+                          return const Text(
+                            'No se encontraron géneros para esta película.',
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          );
+                        }
+                      } else {
+                        return const Text(
+                          'No se encontraron géneros para esta película.',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        );
+                      }
+                    },
                   ),
                 ),
 
