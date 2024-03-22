@@ -1,8 +1,11 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:prueba1/apis/api_credits_movie.dart';
 import 'package:prueba1/apis/api_details_movie.dart';
 import 'package:prueba1/apis/api_popular.dart';
+import 'package:prueba1/model/credits_movie_model.dart';
 import 'package:prueba1/model/popular_model.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,10 +20,12 @@ class DetailMovieScreen extends StatefulWidget {
 class _DetailMovieScreenState extends State<DetailMovieScreen> {
   ApiPopular? apiPopular;
   ApiDetailsMovie apiDetailsMovie = ApiDetailsMovie();
+  ApiCreditsMovie? apiCreditsMovie;
 
   @override
   void initState() {
     apiPopular = ApiPopular();
+    apiCreditsMovie = ApiCreditsMovie();
     super.initState();
   }
 
@@ -128,16 +133,6 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                     ],
                   ),
                 ),
-                // AspectRatio(
-                //   aspectRatio: 16 / 9, // Proporción del aspecto para la imagen
-                //   child: FadeInImage(
-                //     placeholder: const AssetImage('images/load.gif'),
-                //     image: NetworkImage(
-                //       'https://image.tmdb.org/t/p/w500/${popularModel.backdropPath}',
-                //     ),
-                //     fit: BoxFit.cover,
-                //   ),
-                // ),
 
                 // Visualizador del tráiler
                 Container(
@@ -298,16 +293,102 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                   ),
                 ),
 
-                //GENEROS
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: Text(
-                    'Actores',
-                    style: GoogleFonts.lato(
-                      fontSize: 18,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                //ACTORES
+                Container(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Actores',
+                          style: GoogleFonts.lato(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 150,
+                          child: FutureBuilder<List<CastModel>?>(
+                            future: apiCreditsMovie!
+                                .getActors(popularModel.id as int),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const Center(
+                                    child: CircularProgressIndicator());
+                              } else if (snapshot.hasError) {
+                                return Center(
+                                    child: Text('Error: ${snapshot.error}'));
+                              } else if (snapshot.hasData) {
+                                List<CastModel>? actors = snapshot.data;
+                                if (actors != null && actors.isNotEmpty) {
+                                  return ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: actors.length,
+                                    itemBuilder: (context, index) {
+                                      final actor = actors[index];
+                                      return Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Column(
+                                          children: [
+                                            CircleAvatar(
+                                              radius: 40,
+                                              backgroundImage:
+                                                  actor.profilePath != null
+                                                      ? NetworkImage(
+                                                          'https://image.tmdb.org/t/p/w500/${actor.profilePath}',
+                                                        )
+                                                      : null,
+                                              child: actor.profilePath != null
+                                                  ? null
+                                                  : const Icon(Icons.person,
+                                                      size: 40),
+                                            ),
+                                            const SizedBox(height: 8),
+                                            Text(
+                                              actor.name as String,
+                                              style: GoogleFonts.lato(
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white60,
+                                              ),
+                                            ),
+                                            const SizedBox(height: 5),
+                                            Text(
+                                              actor.character as String,
+                                              style: GoogleFonts.lato(
+                                                fontSize: 14,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  );
+                                } else {
+                                  return const Center(
+                                      child: Text(
+                                    'No se encontraron actores para esta película.',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ));
+                                }
+                              } else {
+                                return const Center(
+                                    child: Text(
+                                  'No se encontraron actores para esta película.',
+                                  style: TextStyle(color: Colors.white),
+                                ));
+                              }
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

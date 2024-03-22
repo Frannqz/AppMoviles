@@ -1,22 +1,20 @@
-import 'package:flutter_test/flutter_test.dart';
-import 'package:prueba1/apis/api_details_movie.dart';
+import 'package:prueba1/apis/api_credits_movie.dart';
+import 'package:prueba1/model/credits_movie_model.dart';
 
-void main() {
-  test('Test de integración para obtener géneros de una película', () async {
-    final api = ApiDetailsMovie();
-    final int movieId = 1011985;
-    final genres = await api.getGenres(movieId);
+void main() async {
+  ApiCreditsMovie apiCreditsMovie = ApiCreditsMovie();
 
-    if (genres != null) {
-      print("Géneros de la película:");
-      genres.forEach((genre) {
-        print(genre);
-      });
-    } else {
-      print("No se pudieron obtener los géneros de la película.");
+  //int movieId = 1011985;
+  int movieId = 872585;
+  List<CastModel>? actors = await apiCreditsMovie.getActors(movieId);
+
+  // Verificar si se obtuvieron los actores correctamente
+  if (actors != null) {
+    print('Se obtuvieron los actores:');
+    for (var actor in actors) {
+      print('Nombre: ${actor.name} \nPersonaje: ${actor.character}');
     }
-    expect(genres, isNotNull); // Verifica que los géneros no sean nulos
-    expect(genres!.length,
-        greaterThan(0)); // Verifica que se haya devuelto al menos un género
-  });
+  } else {
+    print('No se pudieron obtener los actores.');
+  }
 }
