@@ -25,6 +25,9 @@ class _PopularMoviesScreenState extends State<PopularMoviesScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.black87,
         foregroundColor: Colors.white,
+        shape: RoundedRectangleBorder(
+            side: const BorderSide(width: 3, color: Colors.white),
+            borderRadius: BorderRadius.circular(20)),
         onPressed: () => Navigator.pushNamed(context, "/favorites"),
         child: const Icon(Icons.movie_creation_outlined),
       ),
