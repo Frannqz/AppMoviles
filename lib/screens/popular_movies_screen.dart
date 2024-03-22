@@ -22,6 +22,12 @@ class _PopularMoviesScreenState extends State<PopularMoviesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.black87,
+        foregroundColor: Colors.white,
+        onPressed: () => Navigator.pushNamed(context, "/favorites"),
+        child: const Icon(Icons.movie_creation_outlined),
+      ),
       appBar: AppBar(
         backgroundColor: Colors.black,
         foregroundColor: Colors.white,

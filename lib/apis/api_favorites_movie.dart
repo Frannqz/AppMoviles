@@ -3,16 +3,15 @@ import 'package:prueba1/model/popular_model.dart';
 
 class ApiFavorites {
   final String apiKey = 'fc94b66bb0314813cf7af53dd2cba49d';
-  final String sessionId =
-      'b7f92c044e4b5fa649778b25ff137684d00a012e'; // Session ID existente
+  final String sessionId = 'b7f92c044e4b5fa649778b25ff137684d00a012e';
   final String authorizedRequestToken =
-      '9eb53cab5da2cff803baf53e3da370781ace8efe'; // Token autorizado
+      '9eb53cab5da2cff803baf53e3da370781ace8efe';
 
   Future<List<Map<String, dynamic>>> getFavoriteMovies() async {
     try {
       final dio = Dio();
       final response = await dio.get(
-        'https://api.themoviedb.org/3/account/21050747/favorite/movies',
+        'https://api.themoviedb.org/3/account/21105275/favorite/movies',
         queryParameters: {
           'api_key': apiKey,
           'session_id': sessionId,
@@ -50,7 +49,7 @@ class ApiFavorites {
       if (response.statusCode == 200) {
         print('Película agregada a favoritos');
       } else {
-        print('Película agregada a favoritos');
+        print('Error al agregar a favoritos');
       }
     } catch (e) {
       throw Exception('Error: $e');
@@ -61,7 +60,7 @@ class ApiFavorites {
     try {
       final dio = Dio();
       final response = await dio.post(
-        'https://api.themoviedb.org/3/account/21050747/favorite',
+        'https://api.themoviedb.org/3/account/21105275/favorite',
         queryParameters: {
           'api_key': apiKey,
           'session_id': sessionId,
@@ -87,12 +86,11 @@ class ApiFavorites {
     try {
       final dio = Dio();
       final response = await dio.get(
-        'https://api.themoviedb.org/3/movie/$movieId?api_key=6b89756e6ddbcfb4d74483d65b5b45ff&language=es',
+        'https://api.themoviedb.org/3/movie/$movieId?api_key=fc94b66bb0314813cf7af53dd2cba49d&language=es-MX',
       );
 
       if (response.statusCode == 200) {
-        return PopularModel.fromMap(response
-            .data); // Crear un objeto PopularModel desde los datos de la respuesta
+        return PopularModel.fromMap(response.data);
       } else {
         throw Exception('Failed to retrieve movie details');
       }
