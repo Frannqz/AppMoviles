@@ -61,12 +61,17 @@ class _PopularMoviesScreenState extends State<PopularMoviesScreen> {
                             arguments: snapshot.data![
                                 index]); //Se mandan los argumentos al detail
                       },
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: FadeInImage(
-                          placeholder: const AssetImage('images/load.gif'),
-                          image: NetworkImage(
-                              'https://image.tmdb.org/t/p/w500/${snapshot.data![index].posterPath}'),
+                      child: Hero(
+                        tag:
+                            'poster_${snapshot.data![index].id}', // Asignar un tag único basado en la ID de la película
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: FadeInImage(
+                            placeholder: const AssetImage('images/load.gif'),
+                            image: NetworkImage(
+                              'https://image.tmdb.org/t/p/w500/${snapshot.data![index].posterPath}',
+                            ),
+                          ),
                         ),
                       ),
                     );

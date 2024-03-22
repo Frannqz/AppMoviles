@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:prueba1/apis/api_credits_movie.dart';
 import 'package:prueba1/apis/api_details_movie.dart';
 import 'package:prueba1/apis/api_favorites_movie.dart';
@@ -70,19 +71,22 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
         fit: StackFit.expand,
         children: [
           // Fondo con efecto de desenfoque
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(
-                  'https://image.tmdb.org/t/p/w500/${popularModel.posterPath}',
+          Hero(
+            tag: 'poster_${popularModel.id}',
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(
+                    'https://image.tmdb.org/t/p/w500/${popularModel.posterPath}',
+                  ),
+                  fit: BoxFit.cover,
                 ),
-                fit: BoxFit.cover,
               ),
-            ),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-              child: Container(
-                color: Colors.black.withOpacity(0.5),
+              child: BackdropFilter(
+                filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                child: Container(
+                  color: Colors.black.withOpacity(0.5),
+                ),
               ),
             ),
           ),
