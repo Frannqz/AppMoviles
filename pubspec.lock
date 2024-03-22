@@ -336,6 +336,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  fluttertoast:
+    dependency: "direct main"
+    description:
+      name: fluttertoast
+      sha256: dfdde255317af381bfc1c486ed968d5a43a2ded9c931e87cbecd88767d6a71c1
+      url: "https://pub.dev"
+    source: hosted
+    version: "8.2.4"
   font_awesome_flutter:
     dependency: transitive
     description:
@@ -488,6 +496,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  loading_view:
+    dependency: transitive
+    description:
+      name: loading_view
+      sha256: "3d31c2c5293c2e3518b7330ffdc2fab5c83daaa9218cc45d4406c875f08f0795"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   lottie:
     dependency: "direct main"
     description:
@@ -709,6 +725,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.1"
+  tip_dialog:
+    dependency: "direct main"
+    description:
+      name: tip_dialog
+      sha256: edc1ebbb4b9f9575220c85206cf6986921c2b63d173744be0babac00c2e48bd0
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.0"
   typed_data:
     dependency: transitive
     description:

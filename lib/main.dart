@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:prueba1/screens/Onboardings/favorites_movies_screen.dart';
 import 'package:prueba1/screens/despensa_screen.dart';
 import 'package:prueba1/screens/detail_movie_screen.dart';
 import 'package:prueba1/screens/popular_movies_screen.dart';
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
               '/movies': (BuildContext context) => PopularMoviesScreen(),
               '/moviesDetail': (BuildContext context) => DetailMovieScreen(),
               '/products': (BuildContext context) => ProductsFirebaseScreen(),
+              "/favorites": (BuildContext context) => FavoritesMoviesScreen(),
             },
           );
         });
