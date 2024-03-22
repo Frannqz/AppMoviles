@@ -52,8 +52,6 @@ dependencies:
   firebase_auth: ^4.17.8
   youtube_player_flutter: ^9.0.0
   google_fonts: ^6.2.1
-  tip_dialog: ^4.0.0
-  fluttertoast: ^8.2.4
 
 dev_dependencies:
   flutter_test:

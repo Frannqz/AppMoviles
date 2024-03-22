@@ -1,8 +1,9 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 import 'package:prueba1/apis/api_credits_movie.dart';
 import 'package:prueba1/apis/api_details_movie.dart';
-import 'package:prueba1/apis/api_favorites_movie.dart';
 import 'package:prueba1/apis/api_popular.dart';
 import 'package:prueba1/model/credits_movie_model.dart';
 import 'package:prueba1/model/popular_model.dart';
@@ -21,21 +22,11 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
   ApiDetailsMovie apiDetailsMovie = ApiDetailsMovie();
   ApiCreditsMovie? apiCreditsMovie;
 
-  bool isFavorite = false;
-  final ApiFavorites apiFavorites = ApiFavorites();
-  Key favoriteKey = UniqueKey();
-
   @override
   void initState() {
     apiPopular = ApiPopular();
     apiCreditsMovie = ApiCreditsMovie();
     super.initState();
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _checkIsFavorite();
   }
 
   @override
@@ -57,12 +48,12 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
         ),
         actions: [
           IconButton(
-            key: favoriteKey,
-            icon: Icon(
-              isFavorite ? Icons.favorite : Icons.favorite_border,
-              color: Colors.white,
+            icon: const Icon(
+              Icons.favorite_border,
             ),
-            onPressed: _toggleFavorite,
+            onPressed: () {
+              //Accion
+            },
           ),
         ],
       ),
@@ -290,25 +281,10 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                 ),
 
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: Text(
-                    'Resumen',
-                    style: GoogleFonts.lato(
-                      fontSize: 22,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.all(20.0),
                   child: Text(
                     textAlign: TextAlign.justify,
-                    popularModel.overview != null &&
-                            popularModel.overview!.isNotEmpty
-                        ? popularModel.overview!
-                        : 'No disponible',
+                    'Resumen: \n${popularModel.overview}',
                     style: GoogleFonts.lato(
                       fontSize: 18,
                       color: Colors.white,
@@ -397,7 +373,7 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                                                 color: Colors.white60,
                                               ),
                                             ),
-                                            const SizedBox(height: 2),
+                                            const SizedBox(height: 5),
                                             Text(
                                               actor.character as String,
                                               style: GoogleFonts.lato(
@@ -439,39 +415,5 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
         ],
       ),
     );
-  }
-
-  void _checkIsFavorite() async {
-    final popularModel =
-        ModalRoute.of(context)!.settings.arguments as PopularModel;
-    try {
-      final favoriteMovies = await apiFavorites.getFavoriteMovies();
-      setState(() {
-        isFavorite =
-            favoriteMovies.any((movie) => movie['id'] == popularModel.id);
-      });
-    } catch (e) {
-      print('Error al verificar si la película está en favoritos: $e');
-    }
-  }
-
-  void _toggleFavorite() async {
-    final popularModel =
-        ModalRoute.of(context)!.settings.arguments as PopularModel;
-    try {
-      if (isFavorite) {
-        await apiFavorites.removeFromFavorites(popularModel.id!);
-      } else {
-        await apiFavorites.addToFavorites(popularModel.id!);
-      }
-
-      _checkIsFavorite();
-
-      setState(() {
-        favoriteKey = UniqueKey();
-      });
-    } catch (e) {
-      print('Error: $e');
-    }
   }
 }

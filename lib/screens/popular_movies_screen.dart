@@ -44,8 +44,8 @@ class _PopularMoviesScreenState extends State<PopularMoviesScreen> {
                 child: GridView.builder(
                   itemCount: snapshot.data!.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 0.7,
+                    crossAxisCount: 2, //Cant columnas
+                    childAspectRatio: .7,
                     mainAxisSpacing: 10,
                   ),
                   itemBuilder: (context, index) {
