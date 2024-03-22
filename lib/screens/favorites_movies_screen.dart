@@ -97,14 +97,17 @@ class _FavoritesMoviesScreenState extends State<FavoritesMoviesScreen> {
                                 _updateFavoriteMovies();
                               }
                             },
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: FadeInImage(
-                                placeholder:
-                                    const AssetImage('images/load.gif'),
-                                image: NetworkImage(
-                                    'https://image.tmdb.org/t/p/w500/${movieDetails.posterPath}'),
-                                fit: BoxFit.cover,
+                            child: Hero(
+                              tag: 'poster_${movieDetails.id}',
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: FadeInImage(
+                                  placeholder:
+                                      const AssetImage('images/load.gif'),
+                                  image: NetworkImage(
+                                      'https://image.tmdb.org/t/p/w500/${movieDetails.posterPath}'),
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           );
