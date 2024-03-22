@@ -242,12 +242,12 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                                 label: Text(
                                   genre,
                                   style: GoogleFonts.lato(
-                                    color: Colors.black,
+                                    color: Colors.white,
                                   ),
                                 ),
-                                backgroundColor: Colors.white,
+                                backgroundColor: Colors.black,
                                 elevation: 4,
-                                shadowColor: Colors.green.withOpacity(0.8),
+                                shadowColor: Colors.white.withOpacity(0.4),
                                 padding: const EdgeInsets.all(5.0),
                                 labelPadding:
                                     const EdgeInsets.symmetric(horizontal: 8.0),
@@ -255,7 +255,7 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(50.0),
                                   side: BorderSide(
-                                      color: Colors.green.shade900, width: 1.0),
+                                      color: Colors.grey.shade900, width: 1.0),
                                 ),
                               );
                             }).toList(),
@@ -368,7 +368,7 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                                             Text(
                                               actor.name as String,
                                               style: GoogleFonts.lato(
-                                                fontSize: 16,
+                                                fontSize: 14,
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.white60,
                                               ),
@@ -377,7 +377,7 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                                             Text(
                                               actor.character as String,
                                               style: GoogleFonts.lato(
-                                                fontSize: 14,
+                                                fontSize: 16,
                                                 color: Colors.white,
                                               ),
                                             ),
