@@ -301,12 +301,15 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Actores',
-                          style: GoogleFonts.lato(
-                            fontSize: 18,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
+                        Container(
+                          margin: const EdgeInsets.only(bottom: 10),
+                          child: Text(
+                            'Actores',
+                            style: GoogleFonts.lato(
+                              fontSize: 22,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                         SizedBox(
@@ -334,18 +337,32 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                                         padding: const EdgeInsets.all(8.0),
                                         child: Column(
                                           children: [
-                                            CircleAvatar(
-                                              radius: 40,
-                                              backgroundImage:
-                                                  actor.profilePath != null
-                                                      ? NetworkImage(
-                                                          'https://image.tmdb.org/t/p/w500/${actor.profilePath}',
-                                                        )
-                                                      : null,
-                                              child: actor.profilePath != null
-                                                  ? null
-                                                  : const Icon(Icons.person,
-                                                      size: 40),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(50),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black
+                                                        .withOpacity(0.9),
+                                                    blurRadius: 8,
+                                                    offset: const Offset(0, 5),
+                                                  ),
+                                                ],
+                                              ),
+                                              child: CircleAvatar(
+                                                radius: 40,
+                                                backgroundImage:
+                                                    actor.profilePath != null
+                                                        ? NetworkImage(
+                                                            'https://image.tmdb.org/t/p/w500/${actor.profilePath}',
+                                                          )
+                                                        : null,
+                                                child: actor.profilePath != null
+                                                    ? null
+                                                    : const Icon(Icons.person,
+                                                        size: 40),
+                                              ),
                                             ),
                                             const SizedBox(height: 8),
                                             Text(
