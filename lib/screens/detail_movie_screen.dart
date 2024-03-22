@@ -255,20 +255,21 @@ class _DetailMovieScreenState extends State<DetailMovieScreen> {
                                 label: Text(
                                   genre,
                                   style: GoogleFonts.lato(
-                                    color: Colors.white,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
-                                backgroundColor: Colors.black,
+                                backgroundColor: Colors.white,
                                 elevation: 4,
-                                shadowColor: Colors.white.withOpacity(0.4),
-                                padding: const EdgeInsets.all(5.0),
+                                shadowColor: Colors.white.withOpacity(0.7),
+                                padding: const EdgeInsets.all(3.0),
                                 labelPadding:
                                     const EdgeInsets.symmetric(horizontal: 8.0),
                                 labelStyle: const TextStyle(fontSize: 13.0),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(50.0),
                                   side: BorderSide(
-                                      color: Colors.grey.shade900, width: 1.0),
+                                      color: Colors.grey.shade900, width: 1.5),
                                 ),
                               );
                             }).toList(),
