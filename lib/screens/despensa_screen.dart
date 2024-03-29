@@ -142,60 +142,64 @@ class _DespensaScreenState extends State<DespensaScreen> {
     final txtNombre = TextFormField(
       keyboardType: TextInputType.text,
       controller: conNombre,
-      decoration: const InputDecoration(border: OutlineInputBorder()),
+      decoration: const InputDecoration(
+          labelText: 'Nombre', border: OutlineInputBorder()),
     );
 
     final txtCantidad = TextFormField(
       keyboardType: TextInputType.number,
       controller: conCantidad,
-      decoration: const InputDecoration(border: OutlineInputBorder()),
+      decoration: const InputDecoration(
+          labelText: 'Cantidad', border: OutlineInputBorder()),
     );
 
     final btnAgregar = ElevatedButton.icon(
-        onPressed: () {
-          if (producto == null) {
-            productsDB!.INSERTAR({
-              "nomProducto": conNombre.text,
-              "canProducto": int.parse(conCantidad.text),
-              "fechaCaducidad": conFecha.text
-            }).then((value) {
-              Navigator.pop(context);
-              String msj = "";
-              if (value > 0) {
-                AppValueNotifier.banProducts.value = !AppValueNotifier
-                    .banProducts
-                    .value; //Se hace la negacion para los cambios de estado true o false
-                msj = "Producto insertado";
-              } else {
-                msj = "Ocurrio un error !!!";
-              }
-              var snackbar = SnackBar(content: Text(msj));
-              ScaffoldMessenger.of(context).showSnackBar(snackbar);
-            });
-          } else {
-            productsDB!.ACTUALIZAR({
-              "idProducto": producto.idProducto,
-              "nomProducto": conNombre.text,
-              "canProducto": int.parse(conCantidad.text),
-              "fechaCaducidad": conFecha.text
-            }).then((value) {
-              Navigator.pop(context);
-              String msj = "";
-              if (value > 0) {
-                AppValueNotifier.banProducts.value = !AppValueNotifier
-                    .banProducts
-                    .value; //Se hace la negacion para los cambios de estado true o false
-                msj = "Producto Actualizado";
-              } else {
-                msj = "Ocurrio un error !!!";
-              }
-              var snackbar = SnackBar(content: Text(msj));
-              ScaffoldMessenger.of(context).showSnackBar(snackbar);
-            });
-          }
-        },
-        icon: const Icon(Icons.save),
-        label: const Text('Guardar producto'));
+      onPressed: () {
+        if (producto == null) {
+          productsDB!.INSERTAR({
+            "nomProducto": conNombre.text,
+            "canProducto": int.parse(conCantidad.text),
+            "fechaCaducidad": conFecha.text
+          }).then((value) {
+            Navigator.pop(context);
+            String msj = "";
+            if (value > 0) {
+              AppValueNotifier.banProducts.value = !AppValueNotifier.banProducts
+                  .value; //Se hace la negacion para los cambios de estado true o false
+              msj = "Producto insertado";
+            } else {
+              msj = "Ocurrio un error !!!";
+            }
+            var snackbar = SnackBar(content: Text(msj));
+            ScaffoldMessenger.of(context).showSnackBar(snackbar);
+          });
+        } else {
+          productsDB!.ACTUALIZAR({
+            "idProducto": producto.idProducto,
+            "nomProducto": conNombre.text,
+            "canProducto": int.parse(conCantidad.text),
+            "fechaCaducidad": conFecha.text
+          }).then((value) {
+            Navigator.pop(context);
+            String msj = "";
+            if (value > 0) {
+              AppValueNotifier.banProducts.value = !AppValueNotifier.banProducts
+                  .value; //Se hace la negacion para los cambios de estado true o false
+              msj = "Producto Actualizado";
+            } else {
+              msj = "Ocurrio un error !!!";
+            }
+            var snackbar = SnackBar(content: Text(msj));
+            ScaffoldMessenger.of(context).showSnackBar(snackbar);
+          });
+        }
+      },
+      icon: const Icon(Icons.save),
+      label: const Text('Guardar producto'),
+      style: const ButtonStyle(
+          foregroundColor: MaterialStatePropertyAll(Colors.white),
+          backgroundColor: MaterialStatePropertyAll(Colors.black87)),
+    );
 
     final space = SizedBox(
       height: 10,
@@ -204,7 +208,8 @@ class _DespensaScreenState extends State<DespensaScreen> {
     final txtFecha = TextFormField(
       controller: conFecha,
       keyboardType: TextInputType.none, //Ocultamos el teclado
-      decoration: const InputDecoration(border: OutlineInputBorder()),
+      decoration: const InputDecoration(
+          labelText: 'Fecha de caducidad', border: OutlineInputBorder()),
       onTap: () async {
         //Siempre que lleve un await llevara un async
         DateTime? pickedDate = await showDatePicker(
@@ -233,6 +238,13 @@ class _DespensaScreenState extends State<DespensaScreen> {
           return ListView(
             padding: const EdgeInsets.all(15.0),
             children: [
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  'Añadir producto',
+                  style: TextStyle(fontSize: 28),
+                ),
+              ),
               txtNombre,
               space,
               txtCantidad,
