@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:prueba1/screens/favorites_movies_screen.dart';
 import 'package:prueba1/screens/despensa_screen.dart';
 import 'package:prueba1/screens/detail_movie_screen.dart';
+import 'package:prueba1/screens/maps_screen.dart';
 import 'package:prueba1/screens/popular_movies_screen.dart';
 import 'package:prueba1/screens/products_firebase_screen.dart';
 import 'package:prueba1/screens/register_screen.dart';
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
               '/moviesDetail': (BuildContext context) => DetailMovieScreen(),
               '/products': (BuildContext context) => ProductsFirebaseScreen(),
               "/favorites": (BuildContext context) => FavoritesMoviesScreen(),
+              "/mapa": (BuildContext context) => MapSample(),
             },
           );
         });

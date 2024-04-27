@@ -52,6 +52,11 @@ dependencies:
   firebase_auth: ^4.17.8
   youtube_player_flutter: ^9.0.0
   google_fonts: ^6.2.1
+  google_maps_flutter: ^2.6.0
+  circular_menu: ^3.0.0
+  flutter_polyline_points: ^2.0.0
+  location: ^6.0.1
+  flutter_svg: ^2.0.10+1
 
 dev_dependencies:
   flutter_test:
